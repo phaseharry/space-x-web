@@ -19,7 +19,7 @@ const getLaunchDetails = launch => ({
 export const loadingLaunches = () => {
   return async dispatch => {
     const launches = await axios.get('/api/launches/')
-    dispatch(loadLaunches(launches.data))
+    return dispatch(loadLaunches(launches.data))
   }  
 }
 
@@ -38,6 +38,7 @@ const launchReducer = (state = [], action) => {
     case GET_SPECIFIC_LAUNCH:
       return state.map(launch => { 
         if(launch.flight_number === action.launch.flight_number){ //replaces the simplified launch data with a more detailed one since it was requested
+          console.log(action.launch)
           return action.launch
         } else {
           return launch

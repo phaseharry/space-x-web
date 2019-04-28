@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   mode: 'development',
   entry: ["@babel/polyfill",'./client/index.js'],
@@ -13,7 +11,14 @@ module.exports = {
         test: /\.js$/,
         loader: ['babel-loader'],
         exclude: /node_modules/
-      }
+      },
+      //ignoring the file loader for now
+      // {
+      //   test: /\.(png|svg|jpg|gif)$/,
+      //   use: [
+      //     'file-loader'
+      //   ]
+      // }   
     ]
   }
 } 

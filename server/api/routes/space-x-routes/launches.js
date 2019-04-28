@@ -10,11 +10,17 @@ router.get('/:flightNumber', (req, res, next) => {
   .catch(err => next(err))
 })
 
+
 //gets all launches data
 router.get('/', (req, res, next) => {
   return axios.get('https://api.spacexdata.com/v3/launches')
   .then(spacex => spacex.data) //response obj with metadata from that api
-  .then(launches => res.status(200).send(launches))
+  .then(launches => { 
+    //too complicated for the frontend atm
+    // const limitedInfos = launches.map(launch => { //limited info is the launch data reduced to only a launch's number and its mission name to reduce load times
+    //   return { flight_number: launch.flight_number, mission_name: launch.mission_name } //when a user requests a more detailed version, the more detailed one will replace the limited info launch in store
+    // })
+    res.status(200).send(launches)})
   .catch(err => next(err))
 })
 
