@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "./node_modules/webpack/bin/webpack.js",
+    "postinstall": "npm run webpack",
     "start": "node server.js",
     "start-dev": "npm run webpack -- --watch --mode=development & PORT=3000 nodemon server.js"
   },
