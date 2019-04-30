@@ -5,8 +5,11 @@ import { connect } from 'react-redux'
 import HomeView from './Views/HomeView'
 import LaunchDetails from './Views/LaunchDetails'
 import Launches from './Views/Launches'
+import Roadster from './Views/Roadster'
+import Rockets from './Views/Rockets'
 
 import { loadingLaunches } from './Store/reducers/Launches'
+import { fetchRockets } from './Store/reducers/Rockets'
 
 class App extends React.Component{
   componentDidMount(){
@@ -16,9 +19,11 @@ class App extends React.Component{
     return (
       <Router>
         <Switch>
-          <Route exact path='/' render={(props) => <HomeView {...props}/>}/>
-          <Route exact path='/launches' component={Launches}/>
-          <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>}/>
+          <Route exact path='/' render={(props) => <HomeView {...props}/>} />
+          <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
+          <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
+          <Route exact path='/launches' component={Launches} />
+          <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
         </Switch>
       </Router>
     )
@@ -28,7 +33,10 @@ class App extends React.Component{
 const mapDispatchToProps = dispatch => {
   return {
     initLoad: () => {
-      return dispatch(loadingLaunches())
+      return Promise.all([
+        dispatch(loadingLaunches()), 
+        dispatch(fetchRockets())
+      ])
     }
   }
 }
