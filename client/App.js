@@ -20,14 +20,14 @@ class App extends React.Component{
   render(){
     return (
         <Router>
-          <Nav />
-            <Switch>
-              <Route exact path='/' render={(props) => <HomeView {...props}/>} />
-              <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
-              <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
-              <Route exact path='/launches' component={Launches} />
-              <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
-            </Switch>
+          <Nav/>
+          <Switch>
+            <Route exact path='/' render={(props) => <HomeView {...props}/>} />
+            <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
+            <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
+            <Route exact path='/launches' component={Launches} />
+            <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
+          </Switch>
         </Router>
     )
   }

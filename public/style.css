@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* HomeView Page */
 #HomeView {
   background-image: url("http://i.imgur.com/Nssk73Q.png");
@@ -5,7 +9,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  position: absolute; bottom: 0; left: 0; height: 92%; width: 100%;
+  position: absolute; bottom: 0; left: 0; height: 90%; width: 100%;
   z-index: -1;
 }
 
@@ -13,16 +17,27 @@
 #Nav {
   top: 0;
   right: 0;
-  height: 8%;
+  height: 10%;
   width: 100%;
+  /* max-height: 80px; */
   background-color: black;
   position: absolute;
 }
 
-#Nav li {
-  display: inline-block;
+#Nav nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #Nav a {
   color: white;
+}
+
+/* Logo */
+#nav-logo {
+  height: 1.5em;
+  width: auto;
+  position: relative;
+  bottom: 0.7em;
 }
