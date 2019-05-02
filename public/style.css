@@ -1,8 +1,28 @@
+/* HomeView Page */
 #HomeView {
   background-image: url("http://i.imgur.com/Nssk73Q.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+  position: absolute; bottom: 0; left: 0; height: 92%; width: 100%;
+  z-index: -1;
+}
+
+/* NavBar */
+#Nav {
+  top: 0;
+  right: 0;
+  height: 8%;
+  width: 100%;
+  background-color: black;
+  position: absolute;
+}
+
+#Nav li {
+  display: inline-block;
+}
+
+#Nav a {
+  color: white;
 }

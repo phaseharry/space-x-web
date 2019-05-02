@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import Nav from './Components/Nav'
+
 import HomeView from './Views/HomeView'
 import LaunchDetails from './Views/LaunchDetails'
 import Launches from './Views/Launches'
@@ -17,15 +19,16 @@ class App extends React.Component{
   }
   render(){
     return (
-      <Router>
-        <Switch>
-          <Route exact path='/' render={(props) => <HomeView {...props}/>} />
-          <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
-          <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
-          <Route exact path='/launches' component={Launches} />
-          <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
-        </Switch>
-      </Router>
+        <Router>
+          <Nav />
+            <Switch>
+              <Route exact path='/' render={(props) => <HomeView {...props}/>} />
+              <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
+              <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
+              <Route exact path='/launches' component={Launches} />
+              <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
+            </Switch>
+        </Router>
     )
   }
 }
