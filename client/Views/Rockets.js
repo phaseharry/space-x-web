@@ -6,7 +6,7 @@ class Rockets extends React.Component{
     return (
       <div>
         {this.props.rockets.map(rocket => {
-          return <h1>{rocket.rocket_name}</h1>
+          return <h1 key={rocket.id}>{rocket.rocket_name}</h1>
         })}
       </div>
     )
