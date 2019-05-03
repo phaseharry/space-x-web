@@ -9,6 +9,7 @@ import LaunchDetails from './Views/LaunchDetails'
 import Launches from './Views/Launches'
 import Roadster from './Views/Roadster'
 import Rockets from './Views/Rockets'
+import RocketDetails from './Views/RocketDetails'
 
 import { loadingLaunches } from './Store/reducers/Launches'
 import { fetchRockets } from './Store/reducers/Rockets'
@@ -25,6 +26,7 @@ class App extends React.Component{
             <Route exact path='/' render={(props) => <HomeView {...props}/>} />
             <Route path='/roadster' render={(props) => <Roadster {...props}/>} />
             <Route path='/rockets' render={(props) => <Rockets {...props}/>} />
+            <Route path='/rockets/:rocketId' render={(props) => <RocketDetails {...props}/>} />
             <Route exact path='/launches' component={Launches} />
             <Route path='/launches/:flightNum' render={(props) => <LaunchDetails {...props}/>} />
           </Switch>

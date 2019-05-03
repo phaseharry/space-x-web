@@ -1,15 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-//disabling specific search atm
-//import { detailedLaunch } from '../Store/reducers/Launches'
-
 class LaunchDetails extends React.Component{
-  // componentDidMount(){
-  //   const { match,  getSpecificLaunch } = this.props 
-  //   const flightNum = match.params.flightNum
-  //   return getSpecificLaunch(flightNum)
-  // }
   render(){
     const { details, 
       flight_number, 
@@ -41,11 +33,5 @@ const mapStateToProps = ({ launches }, { match }) => {
     launchDetails: launches.find(launch => launch.flight_number == flightNum) || {}
   }  
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getSpecificLaunch: (flightNum) => dispatch(detailedLaunch(flightNum))
-//   }
-// }
 
 export default connect(mapStateToProps, null)(LaunchDetails)

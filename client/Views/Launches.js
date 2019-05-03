@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import LaunchItem from '../Components/LaunchItem'
+
 class Launches extends React.Component{
   render(){
     const { launches } = this.props 
@@ -8,9 +10,11 @@ class Launches extends React.Component{
       <div>
         {launches.map(launch => {
           return (
-            <div key={launch.flight_number}>
-              <h2>{launch.mission_name}</h2>
-            </div>
+            <LaunchItem 
+              key={launch.flight_number} 
+              flight_number={launch.flight_number}
+              mission_name={launch.mission_name}
+            />
           )
         })}
       </div>

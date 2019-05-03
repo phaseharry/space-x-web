@@ -1,12 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import RocketItem from '../Components/RocketItem'
+
 class Rockets extends React.Component{
   render(){
     return (
       <div>
         {this.props.rockets.map(rocket => {
-          return <h1 key={rocket.id}>{rocket.rocket_name}</h1>
+          return (
+            <RocketItem 
+              key={rocket.id} 
+              rocketId={rocket.id} 
+              rocket_name={rocket.rocket_name}
+            />
+          )
         })}
       </div>
     )
