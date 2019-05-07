@@ -37,9 +37,57 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  list-style-type: none;
   width: 25%;
 }
 
 #Nav a {
   color: white;
+  text-decoration: none;
+}
+
+#Nav a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+
+/* Launches View */
+#launches-container {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+}
+
+.launch-item {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.launch-item a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.launch-item a:visited {
+  color: black;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.launch-item a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.launch-item a:active {
+  color: rgba(69, 41, 228, 0.171);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.launch-item-heading {
+  margin-left: 2em;
 }

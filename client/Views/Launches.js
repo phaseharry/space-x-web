@@ -7,7 +7,7 @@ class Launches extends React.Component{
   render(){
     const { launches } = this.props 
     return (
-      <div>
+      <div id='launches-container'>
         {launches.map(launch => {
           return (
             <LaunchItem 
