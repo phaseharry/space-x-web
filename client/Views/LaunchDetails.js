@@ -17,7 +17,7 @@ class LaunchDetails extends React.Component{
       links 
     } = this.props.launchDetails
     return (
-      <div>
+      <div className='launch-details'>
         <h1>{mission_name}</h1>
         <h3>SpaceX Flight Number: {flight_number}</h3>
         <h5>{launch_year}</h5>

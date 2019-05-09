@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const LaunchItem = props => {
-  const { flight_number, mission_name } = props
+  const { flight_number, mission_name, upcoming } = props
   return (
     <div className='launch-item'>
       <Link to={`/launches/${flight_number}`}>

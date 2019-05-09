@@ -14,6 +14,7 @@ class Launches extends React.Component{
               key={launch.flight_number} 
               flight_number={launch.flight_number}
               mission_name={launch.mission_name}
+              upcoming={launch.is_tentative}
             />
           )
         })}
