@@ -22,6 +22,16 @@ class LaunchDetails extends React.Component{
         <h3>SpaceX Flight Number: {flight_number}</h3>
         <h5>{launch_year}</h5>
         <p>{details ? details: 'No details available'}</p>
+        {
+          launch_success? 
+          <p>Launch was successful</p> : 
+          <div className='failure-report'>
+            <p>{`Time: ${launch_failure_details.time}`}</p>
+            <p>{`Altitude: ${launch_failure_details.altitude}`}</p>
+            <p>{`Reason: ${launch_failure_details.reason}`}</p>
+          </div>
+        }
+        {links.flickr_images.map((imgLink, idx) => <img src={imgLink} alt={`${mission_name} launch`} key={idx}/>)}
       </div>
     )
   }

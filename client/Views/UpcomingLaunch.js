@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 
 import LaunchItem from '../Components/LaunchItem'
 
-class Launches extends React.Component{
+class UpcomingLaunch extends React.Component{
   render(){
-    const { launches } = this.props 
+    const { upcoming } = this.props
     return (
       <div id='launches-container'>
-        {launches.map(launch => {
+        {upcoming.map(launch => {
           return (
             <LaunchItem 
               key={launch.flight_number} 
@@ -23,10 +23,11 @@ class Launches extends React.Component{
   }
 }
 
-const mapStateToProps = ({ launches }) => {
+
+const mapStateToProps = ({ upcoming }) => {
   return {
-    launches
+    upcoming
   }
 }
 
-export default connect(mapStateToProps, null)(Launches)
+export default connect(mapStateToProps)(UpcomingLaunch)

@@ -18,7 +18,7 @@ const getLaunchDetails = launch => ({
 //thunks
 export const loadingLaunches = () => {
   return async dispatch => {
-    const launches = await axios.get('/api/launches/')
+    const launches = await axios.get('/api/launches/past')
     return dispatch(loadLaunches(launches.data))
   }  
 }
