@@ -3,21 +3,21 @@ const { sync, seed } = require('../server/db')
 const { User, Comment } = require('../server/db').models
 
 describe('Testing User and Comment models', () => {
-  describe('Our seeded data is in our database', () => {
-    let data = {
-      users: [],
-      comments: []
-    }
-    let Elon
-  
-    beforeEach('sync and seeding our data', () => {
-      return sync()
-      .then(() => seed())
-      .then((seededData) => {
-        data = seededData
-        Elon = data.users.find((person) => person.firstName === 'Elon')
-      })
+  let data = {
+    users: [],
+    comments: []
+  }
+  let Elon
+
+  beforeEach('sync and seeding our data', () => {
+    return sync()
+    .then(() => seed())
+    .then((seededData) => {
+      data = seededData
+      Elon = data.users.find((person) => person.firstName === 'Elon')
     })
+  })
+  describe('Our seeded data is in our database', () => {
 
     it('has the seeded data', () => {
       //seeded the right amount of users and comments according to seed file
@@ -36,6 +36,7 @@ describe('Testing User and Comment models', () => {
       expect(comments[0].post).to.be.a('string')
     })
   })
+
   describe('User and Comment models functionality works', () => {
     describe('User model', () => {  
       it('can create a new instance of data in our db', () => {
@@ -65,26 +66,84 @@ describe('Testing User and Comment models', () => {
         expect(updatedSteve.id).to.equal(Steve.id) //same instance in the database
         expect(updatedSteve.password).to.equal('DentInUni')
       })
-      xit('users can be removed from database', () => {
+      it('users can be removed from database', async () => {
+        const Tessa = await User.create({
+          firstName: 'Tessa',
+          lastName: 'Beck',
+          email: 'tbeck@gmail.com',
+          password: 'randomPassword'
+        })
+        expect(Tessa).to.be.ok
+        expect(Tessa.firstName).to.equal('Tessa')
+        expect(Tessa.lastName).to.equal('Beck')
+        expect(Tessa.email).to.equal('tbeck@gmail.com')
+        
+        await Tessa.destroy()
+        const queriedInstance = await User.findByPk(Tessa.id)
+        expect(queriedInstance).to.be.a('null') //null value since Tessa does not exist in our db anymore
 
       })
-      xit('users can find their commets', () => {
-
+      it('users can find their comments', async () => {
+        const Jeff = await User.findOne({
+          where: {
+            firstName: 'Jeff',
+            lastName: 'Bezos'
+          },
+          include: { model: Comment }
+        })
+        expect(Jeff.comments.length).to.equal(1) //Jeff only has one comment seeded into our database
+        expect(Jeff.comments[0].post).to.be.a('string')
       })
     })
+    describe('Comments model', () => {
+      let Scott
+      let testComment
+      const testContent = 'WOW, the rocket is resuable'
+      beforeEach('creating a user that will be doing operations to comments model', () => {
+        return User.create({
+          firstName: 'Scott',
+          lastName: 'Thunky',
+          email: 'sthunky@gmail.com',
+          password: 'asdf1234'
+        })
+        .then(user => {
+          Scott = user
+          return Comment.create({
+            post: testContent,
+            categoryName: 'launches',
+            itemId: 7,
+            userId: Scott.id
+          })
+        })
+        .then(comment => {
+          testComment = comment
+        })
+      })
+      it('can create a new comment in our db', async () => {
+        const postContent = "Hey, I can't believe that launch failed. Is there anywhere I can read more comprehensive data regarding the launch?"
+        const newPost = await Comment.create({
+          post: postContent,
+          categoryName: 'launches',
+          itemId: 7,
+          userId: Scott.id
+        })
 
-    xdescribe('Comments model', () => {
-      it('can create a new instance of data in our db', () => {
-
+        expect(newPost.post).to.deep.equal(postContent)
+        expect(newPost.post).to.be.a('string')
       })
       it('can be updated', () => {
-
+        return testComment.update({
+          post: "Oh wow, the rocket is resuable. This will reduce the cost of space travel drastically"
+        })
+        .then(updatedPost => {
+          expect(updatedPost.post).to.be.a('string')
+          expect(updatedPost.post).to.not.equal(testContent)
+        })
       })
-      it('can be deleted from our database', () => {
-
-      })
-      it('can be used to track the user who posted the comment', () => {
-
+      it('can be deleted from our database', async () => {  
+        await testComment.destroy()
+        const queriedComment = await Comment.findByPk(testComment.id)
+        expect(queriedComment).to.be.a('null')
       })
     })
   })
