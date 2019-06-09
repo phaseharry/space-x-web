@@ -7,9 +7,9 @@
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "postinstall": "npm run webpack",
     "start": "node server.js",
-    "start-dev": "npm run webpack -- --watch --mode=development & PORT=3000 DATABASE_URL=postgres://localhost/spacex nodemon server.js",
-    "test-models": "",
-    "test-apis": ""
+    "start-dev": "npm run webpack -- --watch --mode=development & PORT=3000 nodemon server.js",
+    "test-models": "mocha --watch server-tests/models.spec.js",
+    "test-apis": "mocha --watch tests/addfilenamehere"
   },
   "author": "Harry C",
   "license": "MIT",
