@@ -9,7 +9,8 @@
     "start": "node server.js",
     "start-dev": "npm run webpack -- --watch --mode=development & PORT=3000 nodemon server.js",
     "test-models": "mocha --watch server-tests/models.spec.js",
-    "test-apis": "mocha --watch tests/addfilenamehere"
+    "test-routes": "mocha --watch server-tests/routes.spec.js",
+    "test-spacex-routes": "mocha --watch server-tests/spacex-routes.spec.js"
   },
   "author": "Harry C",
   "license": "MIT",

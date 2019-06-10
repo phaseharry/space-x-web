@@ -17,14 +17,13 @@ describe('Testing User and Comment models', () => {
       Elon = data.users.find((person) => person.firstName === 'Elon')
     })
   })
-  describe('Our seeded data is in our database', () => {
 
+  describe('Our seeded data is in our database', () => {
     it('has the seeded data', () => {
       //seeded the right amount of users and comments according to seed file
       expect(data.users.length).to.equal(5) 
       expect(data.comments.length).to.equal(4)
     })
-  
     it('Elon exists', () => {
       expect(Elon).to.be.ok
       expect(Elon.firstName).to.equal('Elon')
@@ -81,7 +80,6 @@ describe('Testing User and Comment models', () => {
         await Tessa.destroy()
         const queriedInstance = await User.findByPk(Tessa.id)
         expect(queriedInstance).to.be.a('null') //null value since Tessa does not exist in our db anymore
-
       })
       it('users can find their comments', async () => {
         const Jeff = await User.findOne({
@@ -95,10 +93,12 @@ describe('Testing User and Comment models', () => {
         expect(Jeff.comments[0].post).to.be.a('string')
       })
     })
+
     describe('Comments model', () => {
       let Scott
       let testComment
       const testContent = 'WOW, the rocket is resuable'
+
       beforeEach('creating a user that will be doing operations to comments model', () => {
         return User.create({
           firstName: 'Scott',
@@ -119,6 +119,7 @@ describe('Testing User and Comment models', () => {
           testComment = comment
         })
       })
+
       it('can create a new comment in our db', async () => {
         const postContent = "Hey, I can't believe that launch failed. Is there anywhere I can read more comprehensive data regarding the launch?"
         const newPost = await Comment.create({
@@ -127,7 +128,7 @@ describe('Testing User and Comment models', () => {
           itemId: 7,
           userId: Scott.id
         })
-
+        
         expect(newPost.post).to.deep.equal(postContent)
         expect(newPost.post).to.be.a('string')
       })
