@@ -24,3 +24,4 @@ router.get('/:category/:itemId', (req, res, next) => {
   })
 })
 
+module.exports = router
