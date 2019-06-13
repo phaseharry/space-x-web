@@ -12,8 +12,7 @@ router.post('/signup', (req, res, next) => {
     lastName,
     email,
     password
-  })
-  .then(user => res.status(201).json(user))
+  }).then(user => res.status(201).json(user))
 })
 
 router.post('login', (req, res, next) => {
@@ -24,15 +23,14 @@ router.post('login', (req, res, next) => {
       password
     }
   })
-  .then(user => res.json(user))
-  .catch(err => {
-    res.sendStatus(404) //assuming the error is an invalid password or email and not the database not working for now
-  })
+    .then(user => res.json(user))
+    .catch(err => {
+      res.sendStatus(404) //assuming the error is an invalid password or email and not the database not working for now
+    })
 })
 
 router.put('/update-info/:userId', (req, res, next) => {
-  User.findByPk(req.params.userId)
-  .then(user => user.update(req.body))  // assuming any info that's being updated is inside of the req.body for now
+  User.findByPk(req.params.userId).then(user => user.update(req.body)) // assuming any info that's being updated is inside of the req.body for now
 })
 
 module.exports = router

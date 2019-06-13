@@ -40,28 +40,28 @@ const seed = async () => {
       password: 'thefacebook'
     })
   ])
-  const [c1, c2, c3, c4 ] = await Promise.all([
+  const [c1, c2, c3, c4] = await Promise.all([
     Comment.create({
       post: "Hey look at SpaceX's launches @Jeff",
-      categoryName: 'launches',
+      category: 'launches',
       itemId: 6,
       userId: Elon.id
     }),
     Comment.create({
-      post: "HAHAHAHA :(",
-      categoryName: 'launches',
+      post: 'HAHAHAHA :(',
+      category: 'launches',
       itemId: 6,
       userId: Jeff.id
     }),
     Comment.create({
-      post: "Woah, is that an iPad on the dash?",
-      categoryName: 'roadster',
+      post: 'Woah, is that an iPad on the dash?',
+      category: 'roadster',
       itemId: 1,
       userId: Steve.id
     }),
     Comment.create({
-      post: "Times have changed, Steve",
-      categoryName: 'roadster',
+      post: 'Times have changed, Steve',
+      category: 'roadster',
       itemId: 1,
       userId: Elon.id
     })
@@ -73,8 +73,8 @@ const seed = async () => {
 }
 
 module.exports = {
-  sync, 
-  seed, 
+  sync,
+  seed,
   models: {
     User,
     Comment

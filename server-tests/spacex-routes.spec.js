@@ -2,6 +2,7 @@
 const supertest = require('supertest')(require('../server/app'))
 const expect = require('chai').expect
 
+//add more testing regarding 404 when we have error middleware setup
 describe('Testing SpaceX requests', () => {
   describe('SpaceX launch routes', () => {
     it('/api/launches/past route fetches all past SpaceX launches', () => {
@@ -40,10 +41,10 @@ describe('Testing SpaceX requests', () => {
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(res => {
-          expect(res.body.flight_number).to.deep.equal(sampleData.flight_number)
-          expect(res.body.mission_name).to.deep.equal(sampleData.mission_name)
-          expect(res.body.launch_year).to.deep.equal(sampleData.launch_year)
-          expect(res.body.launch_success).to.deep.equal(sampleData.launch_success)
+          expect(res.body.flight_number).to.equal(sampleData.flight_number)
+          expect(res.body.mission_name).to.equal(sampleData.mission_name)
+          expect(res.body.launch_year).to.equal(sampleData.launch_year)
+          expect(res.body.launch_success).to.equal(sampleData.launch_success)
         })
     })
   })
@@ -57,11 +58,11 @@ describe('Testing SpaceX requests', () => {
         .expect(res => {
           const [falcon1, falcon9, falconHeavy, bigFalconRocket] = res.body
           expect(res.body.length).to.equal(4)
-          expect(falcon1.company).to.deep.equal('SpaceX')
-          expect(falcon1.rocket_id).to.deep.equal('falcon1')
-          expect(falcon9.rocket_id).to.deep.equal('falcon9')
-          expect(falconHeavy.rocket_id).to.deep.equal('falconheavy')
-          expect(bigFalconRocket.rocket_id).to.deep.equal('bfr')
+          expect(falcon1.company).to.equal('SpaceX')
+          expect(falcon1.rocket_id).to.equal('falcon1')
+          expect(falcon9.rocket_id).to.equal('falcon9')
+          expect(falconHeavy.rocket_id).to.equal('falconheavy')
+          expect(bigFalconRocket.rocket_id).to.equal('bfr')
         })
     })
     it("/api/rockets/:rocketId route grabs a specific rocket's information", () => {
@@ -71,7 +72,7 @@ describe('Testing SpaceX requests', () => {
         .expect('Content-Type', /json/)
         .expect(res => {
           const { first_flight, company, rocket_id, rocket_name, rocket_type } = res.body
-          expect(first_flight).to.deep.equal('2006-03-24')
+          expect(first_flight).to.equal('2006-03-24')
           expect(company).to.equal('SpaceX')
           expect(rocket_id).to.equal('falcon1')
           expect(rocket_name).to.equal('Falcon 1')
@@ -93,8 +94,8 @@ describe('Testing SpaceX requests', () => {
         .expect('Content-Type', /json/)
         .expect(res => {
           const { name, details } = res.body
-          expect(name).to.deep.equal(roadsterName)
-          expect(details).to.deep.equal(roadsterDetails)
+          expect(name).to.equal(roadsterName)
+          expect(details).to.equal(roadsterDetails)
         })
     })
   })
