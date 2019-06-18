@@ -1,36 +1,44 @@
-const router = require('express').Router
+const router = require('express').Router()
 const { User, Comment } = require('../../db').models
 
 /*
-  comments/
+  path: /api/comments/
+  currently there should only be 3 categories: rockets, launches, and roadster
+  if a request comes in with a category that's not one of those 3 we throw a 404 error back
 */
+const categories = ['rockets', 'launches', 'roadster']
 
-router.put('/', (req, res, next) => {
-  const { id, post } = req.params //id is the primaryKey of the comment
-  Comment.findByPk(id)
-    .then(instance => instance.update({ post })) //instance basically represents the comment instance (running out of names)
-    .then(updatedPost => res.status(201).send(updatedPost))
-    .catch(err => next(err))
+router.param('category', (req, res, next, value) => {
+  const category = categories.find(category => category === value)
+  if (category) {
+    req.category = category
+    next()
+  } else {
+    const err = new Error(`${value} is not a category`)
+    err.status = 404
+    next(err)
+  }
+})
+
+router.put('/:category/:itemId/:postId', (req, res, next) => {
+  const category = req.category
+  const { itemId, postId } = req.params
 })
 
 router.post('/:category/:itemId', (req, res, next) => {
-  const { category, itemId } = req.params
-  const { post, userId } = req.body //maybe get userId from auth header when that's set up
-  Comment.create({
-    category,
-    itemId,
-    post,
-    userId
-  })
-    .then(comment => res.status(201).send(comment))
-    .catch(err => next(err))
+  const category = req.category
+  const itemId = req.params.itemId
 })
 
 router.get('/:category/:itemId', (req, res, next) => {
-  const { category, itemId } = req.params
+  const category = req.category
+  const itemId = req.params.itemId
+
   Comment.findAll({
-    category,
-    itemId
+    where: {
+      category,
+      itemId
+    }
   })
     .then(comments => {
       //sort them by time of posting (will do later)
